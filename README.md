@@ -99,13 +99,41 @@ far away and slows down as it arrives.
 | 6 | Distance sensor (gripper pickup check) |
 | 9 | TouchLED |
 
-The first design had a fourth (elbow) motor. The base joint did not have
-enough torque to move the arm with it attached, so the current version uses
-three motors. The planned next design moves the first arm motor to the base
-and gears it down with a chain, with a smaller gripper.
+### Design history
+
+The first design had a fourth (elbow) motor. With the motor mounted at the end
+of the arm, the base joint did not have enough torque to lift it, so the
+current, tested version uses three motors.
+
+### Next design (4 motors)
+
+If time allows, the team plans to bring the fourth motor back with a redesign
+that cuts the load on the joints:
+
+- **Chain drive**: the motor that sat at the end of the arm moves down to the base and drives its joint through a chain, so its weight no longer hangs off the arm
+- **Gear reduction**: the chain gears the joint down for more torque
+- **Lighter gripper**: about half the weight of the original
+- **Shorter arm**: less leverage working against each joint
+
+## Status
+
+The code in this repository is tested and working on the 3-motor arm.
+Upcoming changes:
+
+- Retune the joint limits (`BaseLimit`, `v1Limit`, `gripLimit`)
+- If the 4-motor design is built: add the fourth joint back to recording,
+  replay, manual control and shutdown, and retune `SNAP`, `TOLERANCE`,
+  `DEADBAND` and `HOME_POS` for the geared joint (the encoder measures the
+  motor shaft, so a geared joint turns fewer degrees than the motor)
 
 ## Possible improvements
 
 - Group each joint's motor, recording and control into a `Joint` class instead of separate arrays
 - Show a message on the Brain screen when the pickup check stops a replay
-- Tune the control gain after adding the chain reduction
+
+## Team
+
+- Reagan
+- Jiyul
+- Alex
+- Andrew
